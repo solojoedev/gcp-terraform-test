@@ -18,6 +18,7 @@ provider "google" {
 resource "google_storage_bucket" "my_bucket" {
   name     = "solojoe-terraform-bucket"
   location = "US"
+}
 # ---------- Compute Engine VM ----------
 resource "google_compute_instance" "vm_instance" {
   name          = "solojoe-vm"
@@ -34,5 +35,4 @@ resource "google_compute_instance" "vm_instance" {
     network = "default"
     access_config {}
   }
-}
 }

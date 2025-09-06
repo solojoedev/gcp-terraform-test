@@ -1,5 +1,16 @@
-*.tfstate
-*tfstate.backup
+# Local .terraform directory
 .terraform/
-terraform.tfvars
+
+# Terraform state
+*.tfstate
+*.tfstate.backup
+
+# Sensitive input variables
+*.tfvars
+
+# Credentials
 *.json
+
+# IDE files
+.vscode/
+.idea/
