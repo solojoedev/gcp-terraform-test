@@ -10,8 +10,8 @@ terraform {
 }
 
 provider "google" {
-  credentials = file ("terraform-practive-471123-ca992cbcde3a.json")
-  project     = "terraform-practive-471123" 
+  credentials = file("terraform-practive-471123-ca992cbcde3a.json")
+  project     = "terraform-practive-471123"
   region      = "us-central1"
 }
 # ---------- Google Cloud Storage Bucket ----------
@@ -26,9 +26,9 @@ resource "google_project_service" "compute" {
 }
 
 resource "google_compute_instance" "vm_instance" {
-  name          = "solojoe-vm"
-  machine_type  = "e2-micro"
-  zone          = "us-central1-a"
+  name         = "solojoe-vm"
+  machine_type = "e2-micro"
+  zone         = "us-central1-a"
 
   boot_disk {
     initialize_params {
