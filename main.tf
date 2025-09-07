@@ -20,6 +20,11 @@ resource "google_storage_bucket" "my_bucket" {
   location = "US"
 }
 # ---------- Compute Engine VM ----------
+resource "google_project_service" "compute" {
+  project = "terraform-practive-471123"
+  service = "compute.googleapis.com"
+}
+
 resource "google_compute_instance" "vm_instance" {
   name          = "solojoe-vm"
   machine_type  = "e2-micro"
@@ -35,4 +40,5 @@ resource "google_compute_instance" "vm_instance" {
     network = "default"
     access_config {}
   }
+  tags = ["free-tier"]
 }

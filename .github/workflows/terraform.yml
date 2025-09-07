@@ -1,0 +1,42 @@
+name: Terraform CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:  # 👈 fix this from `pull_requests`
+
+jobs:
+  terraform:
+    name: Terraform Plan and Apply
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.6.0
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
+          
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Format Check
+        run: terraform fmt -check
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        run: terraform plan
+
+      # OPTIONAL: Auto Apply (enable with caution!)
+      # - name: Terraform Apply
+      #   run: terraform apply -auto-approve
+      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
