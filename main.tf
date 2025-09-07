@@ -10,7 +10,7 @@ terraform {
 }
 
 provider "google" {
-  credentials = file("terraform-practive-471123-ca992cbcde3a.json")
+  credentials = var.GOOGLE_CREDENTIALS
   project     = "terraform-practive-471123"
   region      = "us-central1"
 }

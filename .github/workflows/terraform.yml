@@ -22,8 +22,8 @@ jobs:
       - name: Authenticate to Google Cloud
         uses: google-github-actions/auth@v2
         with:
-          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}'
-          
+          credentials_json: '${{ secrets.GOOGLE_CREDENTIALS }}' 
+
       - name: Terraform Init
         run: terraform init
 
@@ -35,8 +35,10 @@ jobs:
 
       - name: Terraform Plan
         run: terraform plan
+        env:
+            TF_VAR_GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
       # OPTIONAL: Auto Apply (enable with caution!)
-      # - name: Terraform Apply
-      #   run: terraform apply -auto-approve
-      #   if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+      - name: Terraform Apply
+        run: terraform apply -auto-approve
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
